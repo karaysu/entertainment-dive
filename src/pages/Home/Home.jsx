@@ -21,6 +21,7 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="home">
+				<h1 className="website-name">Entertainment Dive</h1>
 				<SearchBar className="home-searchbar" onSearchSubmit={this.onSearchSubmit} />
 			</div>
 		);

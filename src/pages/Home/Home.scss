@@ -1,6 +1,17 @@
 .home {
 	width: 100vw;
 	height: 100vh;
-	background-color: #333;
+  background-color: #333;
+  
+  .website-name {
+    color: #e43f5a;
+    font-family: 'Dancing Script', cursive, Georgia, 'Times New Roman', Times, serif;
+    font-size: 6rem;
+    font-size: 6.5vw;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 }
-
