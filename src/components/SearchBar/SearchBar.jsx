@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import "./SearchBar.scss";
 
-function SearchBar({ searchText, setSearchText, onSearchSubmit }) {
+function SearchBar({ searchText, setSearchText, onSearchSubmit, emptySearchResults }) {
 
 	const [searched, setSearched] = useState(false);
 
-  const handleSearch = () => {
-    onSearchSubmit();
+  const handleSearch = async () => {
+		await emptySearchResults();
+		onSearchSubmit();
     // setSearched(true);
   }
   
