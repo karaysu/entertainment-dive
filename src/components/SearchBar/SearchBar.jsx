@@ -1,19 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import "./SearchBar.scss";
 
 function SearchBar({ searchText, setSearchText, onSearchSubmit }) {
+
+	const [searched, setSearched] = useState(false);
+
+  const handleSearch = () => {
+    onSearchSubmit();
+    // setSearched(true);
+  }
+  
   return (
     <>
-      <div className="search-bar">
+      <div className={`search-bar ${searched ? 'after-submit' : 'before-submit'}`}>
         <div className="search-container">
           <input
             className="searchbar"
             type="text"
             placeholder="Search..."
             value={searchText}
-            onChange={setSearchText}
+						onChange={setSearchText}
+						onKeyDown={(e) => {if(e.keyCode === 13) handleSearch()}}
           />
-          <span onClick={onSearchSubmit}>
+          <span onClick={handleSearch}>
             <i className="fa fa-search"></i>
           </span>
         </div>

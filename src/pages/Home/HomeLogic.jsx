@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Home from "./Home";
+
+import { fetchMoviesBySearchText } from "../../api/fetchTMDB";
 
 class HomeLogic extends Component {
   constructor(props) {
@@ -17,21 +20,20 @@ class HomeLogic extends Component {
     this.setState({ searchText: newSearchText });
   };
 
-  // Fetches the data (results and page number) and stores it in the state
+  // Fetches the data ({page, total_results, total_pages, results: Array(20)}) and stores it in the state
   onSearchSubmit = async () => {
     if (this.state.searchText !== "") {
-      const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.state.searchText}&page=1&include_adult=false`;
-      const data = await fetch(endpoint);
-      const {results, page} = await data.json();
-
+      const {results, page} = await fetchMoviesBySearchText(this.state.searchText);
       this.setState({ searchResults: results, currentPage: page });
     }
   };
+
 
   render() {
     return (
       <Home
         searchText={this.state.searchText}
+        searchResults={this.state.searchResults}
         setSearchText={this.setSearchText}
         onSearchSubmit={this.onSearchSubmit}
       />
