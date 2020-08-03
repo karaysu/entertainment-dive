@@ -5,6 +5,7 @@ import './Home.scss';
 import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import InfiniteScrolling from '../../components/InfiniteScrolling/InfiniteScrolling'
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop'
 
 import NoPoster from '../../assests/images/no_poster.jpg'
 
@@ -33,6 +34,7 @@ function Home(props) {
 			<div className="card-container">
         {renderCards(props.searchResults)}
       </div>
+			<ScrollToTop />
       {/* <button className="test" onClick={props.emptySearchResults} type="submit">Test</button> */}
 		</div>
 	);

@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 
-const useInfiniteScroll = (callback) => {
+const useInfiniteScroll = (onSearchSubmit) => {
   const [isFetching, setIsFetching] = useState(false);
 
   //Checking the scroll values of the window
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  });
 
   //When isFetching is true, run the callback onSearchSubmit to load more results to display
   useEffect(() => {
     if (!isFetching) return;
-    callback();
+    onSearchSubmit();
     setIsFetching(false);
-  }, [isFetching]);
+  }, [isFetching, onSearchSubmit]);
 
   //Comparing the values and change isFetching to true for API call
   function handleScroll() {
