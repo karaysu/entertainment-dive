@@ -6,6 +6,7 @@ import { fetchMoviesBySearchText } from "../../api/fetchTMDB";
 class HomeLogic extends Component {
   constructor(props) {
     super(props);
+    //States
     this.state = {
       searchText: "",
       searchResults: [],
@@ -29,11 +30,13 @@ class HomeLogic extends Component {
     }
   };
 
+  //Function to reset the state variables for new search
   emptySearchResults = () => {
     this.setState({searchResults: [], currentPage: 0, totalPages: 0, nextPage: 1});
   }
 
 
+  //Rendering and sending the props to home
   render() {
     return (
       <Home

@@ -10,8 +10,10 @@ import NoPoster from '../../assests/images/no_poster.jpg'
 
 function Home(props) {
 
+  //Passing the onSearchSubmit to Infinite Scrolling
   InfiniteScrolling(props.onSearchSubmit);
   
+  //Rendering the API cards
 	const renderCards = arr => (
 		arr.map((card, index) => {
 			return <Card key={index} id={card.id} title={card.title} poster={card.poster_path ? card.poster_path : NoPoster} doesHavePoster = {card.poster_path != null} />
