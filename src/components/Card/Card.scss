@@ -5,6 +5,9 @@
   margin: 0.625rem;
   
   .content:hover {
+    outline: 1px solid white;
+    transition: outline .5s;
+
     .title {
       padding-bottom: 1.25rem;
       backdrop-filter: blur(5px);
@@ -25,8 +28,9 @@
 		width: 100%;
 		bottom: 0;
 		left: 0;
-    font-size: 1.5rem;
-    font-family: 'Amatic SC', 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    // font-family: 'Amatic SC', 'Courier New', Courier, monospace;
+    font-family: 'Baloo 2', cursive;
     font-weight: 400;
     background: linear-gradient(to top, #000, transparent);
     color: #fff;

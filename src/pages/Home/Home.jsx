@@ -26,6 +26,10 @@ function Home(props) {
     )
 
     const handleSearchSubmit = () => {
+        if(props.searchText == "") {
+            return;
+        }
+        
         // Update the UI
         setIsSearchActive(true);
 

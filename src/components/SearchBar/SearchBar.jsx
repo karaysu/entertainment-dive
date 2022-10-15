@@ -6,6 +6,9 @@ function SearchBar({ searchText, setSearchText, onSearchSubmit, emptySearchResul
 	const [searched, setSearched] = useState(false);
 
   const handleSearch = async () => {
+    if(searchText==="") {
+      return;
+    }
 		await emptySearchResults();
 		onSearchSubmit();
     // setSearched(true);

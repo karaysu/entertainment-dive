@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.themoviedb.org/3';
+const baseUrl = 'https://api.themoviedb.org/4';
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
 export async function fetchMoviesBySearchText(searchText, pageNumber) {
