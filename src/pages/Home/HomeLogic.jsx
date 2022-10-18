@@ -25,14 +25,14 @@ class HomeLogic extends Component {
   // Fetches the data ({page, total_results, total_pages, results: Array(20)}) and stores it in the state
   onSearchSubmit = async () => {
     if (this.state.searchText !== "" && this.state.currentPage <= this.state.totalPages) {
-      const {results, page, total_pages} = await fetchMoviesBySearchText(this.state.searchText, this.state.nextPage);
-      this.setState({ searchResults: [...this.state.searchResults, ...results], currentPage: page, nextPage: page + 1, totalPages: total_pages});
+      const { results, page, total_pages } = await fetchMoviesBySearchText(this.state.searchText, this.state.nextPage);
+      this.setState({ searchResults: [...this.state.searchResults, ...results], currentPage: page, nextPage: page + 1, totalPages: total_pages });
     }
   };
 
   //Function to reset the state variables for new search
   emptySearchResults = () => {
-    this.setState({searchResults: [], currentPage: 0, totalPages: 0, nextPage: 1});
+    this.setState({ searchResults: [], currentPage: 0, totalPages: 0, nextPage: 1 });
   }
 
 
@@ -45,8 +45,8 @@ class HomeLogic extends Component {
         setSearchText={this.setSearchText}
         onSearchSubmit={this.onSearchSubmit}
         emptySearchResults={this.emptySearchResults}
-        totalPages = {this.totalPages}
-        currentPage = {this.currentPage}
+        totalPages={this.totalPages}
+        currentPage={this.currentPage}
       />
     );
   }

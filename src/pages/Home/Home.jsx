@@ -6,6 +6,10 @@ import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import InfiniteScrolling from '../../components/InfiniteScrolling/InfiniteScrolling'
 import ScrollToTop from '../../components/ScrollToTop/ScrollToTop'
+import Button from 'components/Button/Button'
+import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
+import Modal from 'components/Modal/Modal';
+import LoginForm from 'components/Forms/LoginForm/LoginForm';
 
 import NoPoster from '../../assests/images/no_poster.jpg'
 
@@ -14,6 +18,15 @@ import { useState } from 'react'
 function Home(props) {
 
     const [isSearchAcitve, setIsSearchActive] = useState(false);
+    const registerBtnAdditionalProps = {
+        "data-bs-toggle": "modal", 
+        "data-bs-target": "#register-modal"
+    }
+
+    const loginBtnAdditionalProps = {
+        "data-bs-toggle": "modal", 
+        "data-bs-target": "#login-modal"
+    }
 
     //Passing the onSearchSubmit to Infinite Scrolling
     InfiniteScrolling(props.onSearchSubmit);
@@ -26,10 +39,10 @@ function Home(props) {
     )
 
     const handleSearchSubmit = () => {
-        if(props.searchText == "") {
+        if (props.searchText == "") {
             return;
         }
-        
+
         // Update the UI
         setIsSearchActive(true);
 
@@ -39,6 +52,10 @@ function Home(props) {
     return (
         <div className="home">
             <div className={`header-container ${isSearchAcitve ? "header-active" : ""}`}>
+                <div className='account-buttons'>
+                    <Button additionalProps={registerBtnAdditionalProps}>Register</Button>
+                    <Button additionalProps={loginBtnAdditionalProps}>Login</Button>
+                </div>
                 <h1 className="website-name">Entertainment Dive</h1>
                 <div className='home-searchbar'>
                     <SearchBar
@@ -54,6 +71,16 @@ function Home(props) {
             </div>
             <ScrollToTop />
             {/* <button className="test" onClick={props.emptySearchResults} type="submit">Test</button> */}
+
+
+            <Modal id="register-modal" title="Create an account!">
+                <RegisterForm/>
+            </Modal>
+
+            <Modal id="login-modal" title="Dive into your entertainment hub!">
+                <LoginForm/>
+            </Modal>
+            
         </div>
     );
 }

@@ -14,8 +14,8 @@ class DetailLogic extends Component {
 
   async componentDidMount() {
     const movieId = this.props.match.params.id;
-    const data = await fetchMovieDetailById(movieId);
-    console.log(data);
+    // const data = await fetchMovieDetailById(movieId);
+    // console.log(data);
   }
 
   render() {

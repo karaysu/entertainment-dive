@@ -8,7 +8,7 @@ function Card({id, title, poster, doesHavePoster}) {
 	
 
 	return (
-		<div className="card" >
+		<div className="movie-card" >
 			<div className="content">
 				<img className="cover" src={`${fullPosterURL}`} alt="Cover" />
 				<div className="title">{title}</div>

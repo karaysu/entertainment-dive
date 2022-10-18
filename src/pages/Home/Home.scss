@@ -49,6 +49,11 @@
         top: 90%;
       }
     }
+
+    .account-buttons {
+      position: absolute;
+      right: 0;
+    }
     
 
   }
@@ -58,16 +63,16 @@
 
     .website-name {
       font-size: 2.7rem;
-      width: 40%;
+      width: 30%;
 
       top: 30%;
-      left: 5%;
+      left: 0;
     }
 
     .home-searchbar {
-
+      width: 30%;
       top: 30%;
-      right: 5%;
+      // right: 5%;
     }
   }
   
