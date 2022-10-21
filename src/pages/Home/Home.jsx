@@ -18,15 +18,6 @@ import { useState } from 'react'
 function Home(props) {
 
     const [isSearchAcitve, setIsSearchActive] = useState(false);
-    const registerBtnAdditionalProps = {
-        "data-bs-toggle": "modal", 
-        "data-bs-target": "#register-modal"
-    }
-
-    const loginBtnAdditionalProps = {
-        "data-bs-toggle": "modal", 
-        "data-bs-target": "#login-modal"
-    }
 
     //Passing the onSearchSubmit to Infinite Scrolling
     InfiniteScrolling(props.onSearchSubmit);
@@ -53,8 +44,8 @@ function Home(props) {
         <div className="home">
             <div className={`header-container ${isSearchAcitve ? "header-active" : ""}`}>
                 <div className='account-buttons'>
-                    <Button additionalProps={registerBtnAdditionalProps}>Register</Button>
-                    <Button additionalProps={loginBtnAdditionalProps}>Login</Button>
+                    <Button data-bs-toggle="modal" data-bs-target="#register-modal">Register</Button>
+                    <Button data-bs-toggle="modal" data-bs-target="#login-modal">Login</Button>
                 </div>
                 <h1 className="website-name">Entertainment Dive</h1>
                 <div className='home-searchbar'>

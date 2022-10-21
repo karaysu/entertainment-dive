@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 import firebaseApp from 'firebase-app';
 
 function LoginForm() {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -17,6 +19,7 @@ function LoginForm() {
 	}
 
 	const handleSubmit = async function (event) {
+		
 		event.preventDefault();
 
 		// Validate here
@@ -31,6 +34,13 @@ function LoginForm() {
 			const user = userCredential.user;
 			console.log("User:", user)
 			console.log("Login successfully")
+
+			// document.querySelector(".modal-backdrop").classList.remove("show")
+			// document.querySelector(".modal-backdrop").classList.add("hide")
+
+			navigate("dashboard")
+
+
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;

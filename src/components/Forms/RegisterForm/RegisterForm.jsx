@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { redirect } from "react-router-dom";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from 'firebase-app';
@@ -32,6 +33,9 @@ function RegisterForm() {
 			const user = userCredential.user;
 			console.log("User:", user)
 			console.log("Signed in successfully")
+
+			return redirect("/dashboard")
+
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
