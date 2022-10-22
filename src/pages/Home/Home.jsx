@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './Home.scss';
 
@@ -13,11 +13,12 @@ import LoginForm from 'components/Forms/LoginForm/LoginForm';
 
 import NoPoster from '../../assests/images/no_poster.jpg'
 
-import { useState } from 'react'
-
 function Home(props) {
 
     const [isSearchAcitve, setIsSearchActive] = useState(false);
+
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
 
     //Passing the onSearchSubmit to Infinite Scrolling
     InfiniteScrolling(props.onSearchSubmit);
@@ -44,8 +45,8 @@ function Home(props) {
         <div className="home">
             <div className={`header-container ${isSearchAcitve ? "header-active" : ""}`}>
                 <div className='account-buttons'>
-                    <Button data-bs-toggle="modal" data-bs-target="#register-modal">Register</Button>
-                    <Button data-bs-toggle="modal" data-bs-target="#login-modal">Login</Button>
+                    <Button onClick={() => setIsRegisterModalOpen(true)}>Register</Button>
+                    <Button onClick={() => setIsLoginModalOpen(true)}>Login</Button>
                 </div>
                 <h1 className="website-name">Entertainment Dive</h1>
                 <div className='home-searchbar'>
@@ -64,14 +65,22 @@ function Home(props) {
             {/* <button className="test" onClick={props.emptySearchResults} type="submit">Test</button> */}
 
 
-            <Modal id="register-modal" title="Create an account!">
-                <RegisterForm/>
+            <Modal
+                isOpen={isRegisterModalOpen}
+                closeModal={() => setIsRegisterModalOpen(false)}
+                title="Create an account!"
+            >
+                <RegisterForm />
             </Modal>
 
-            <Modal id="login-modal" title="Dive into your entertainment hub!">
-                <LoginForm/>
+            <Modal 
+                isOpen={isLoginModalOpen} 
+                closeModal={() => setIsLoginModalOpen(false)} 
+                title="Dive into your entertainment hub!"
+            >
+                <LoginForm />
             </Modal>
-            
+
         </div>
     );
 }

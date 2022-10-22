@@ -35,11 +35,7 @@ function LoginForm() {
 			console.log("User:", user)
 			console.log("Login successfully")
 
-			// document.querySelector(".modal-backdrop").classList.remove("show")
-			// document.querySelector(".modal-backdrop").classList.add("hide")
-
 			navigate("dashboard")
-
 
 		} catch (error) {
 			const errorCode = error.code;
