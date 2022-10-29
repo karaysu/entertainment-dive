@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import HomeLogic from "pages/Home/HomeLogic";
 import Dashboard from 'pages/Dashboard/Dashboard';
+import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 
 
 const router = createBrowserRouter([
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/dashboard",
-		element: <Dashboard />
+		element: <ProtectedRoute><Dashboard /></ProtectedRoute>
 	},
 ])
 

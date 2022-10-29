@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from 'firebase-app';
+import {useAuth} from 'auth'
+import { useEffect } from 'react';
 
 function RegisterForm() {
 	const [formData, setFormData] = useState({
@@ -10,6 +10,9 @@ function RegisterForm() {
 		password: '',
 		confirmPassword: ''
 	})
+
+	const {user, registerUser} = useAuth()
+	const navigate = useNavigate()
 
 	const handleValueChange = function (field, value) {
 		setFormData({
@@ -23,18 +26,12 @@ function RegisterForm() {
 
 		// Validate here
 
-		// Send api request here.
-
-		const auth = getAuth(firebaseApp);
 		try {
 
-			const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+			await registerUser(formData.email, formData.password);
 			// Signed in 
-			const user = userCredential.user;
-			console.log("User:", user)
-			console.log("Signed in successfully")
 
-			return redirect("/dashboard")
+			
 
 		} catch (error) {
 			const errorCode = error.code;
@@ -44,6 +41,11 @@ function RegisterForm() {
 		}
 
 	}
+
+	useEffect(()=> {
+		if(!user) return;
+		navigate("/dashboard")
+	}, [user])
 
 	return (
 		<form>

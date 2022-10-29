@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
-import firebaseApp from 'firebase-app';
+import { useAuth } from 'auth'
+import { useEffect } from 'react';
 
 function LoginForm() {
 	const navigate = useNavigate();
@@ -10,6 +10,8 @@ function LoginForm() {
 		email: '',
 		password: '',
 	})
+
+	const {user,signIn} = useAuth();
 
 	const handleValueChange = function (field, value) {
 		setFormData({
@@ -19,32 +21,28 @@ function LoginForm() {
 	}
 
 	const handleSubmit = async function (event) {
-		
+
 		event.preventDefault();
 
 		// Validate here
 
-		// Send api request here.
-
-		const auth = getAuth(firebaseApp);
 		try {
 
-			const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+			await signIn(formData.email, formData.password);
 			// Signed in 
-			const user = userCredential.user;
-			console.log("User:", user)
-			console.log("Login successfully")
-
-			navigate("dashboard")
+			// navigate("/dashboard")
 
 		} catch (error) {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			console.error("Login error:")
-			console.error(errorCode, errorMessage)
+			console.error(error)
 		}
 
 	}
+
+	// As soon as User value is set, navigate to dashboard.
+	useEffect(()=> {
+		if(!user) return;
+		navigate("/dashboard")
+	}, [user])
 
 	return (
 		<form>
