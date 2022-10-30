@@ -1,21 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
+import LocalStorage from 'localstorage';
+
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from 'firebase-app';
 
 const AuthContext = React.createContext(null);
 
-export function AuthProvider({children}) {
-	const [user, setUser] = useState(null);
+export function AuthProvider({ children }) {
+	const [user, setUser] = useState(LocalStorage.getItem('user') || null);
 	const auth = getAuth(firebaseApp);
 
 	const registerUser = async (email, password) => {
 		try {
 
 			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+			const user = userCredential.user
+			storeUser(user)
 			// Signed in 
-			setUser(userCredential.user)
 			console.log("User:", user)
 			console.log("Signed in successfully")
 
@@ -33,9 +36,9 @@ export function AuthProvider({children}) {
 		try {
 
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+			const user = userCredential.user;
+			storeUser(user)
 			// Signed in 
-			setUser(userCredential.user)
-			console.log("User:", user)
 			console.log("Login successfully")
 
 		} catch (error) {
@@ -43,13 +46,33 @@ export function AuthProvider({children}) {
 		}
 	}
 
-	
+
 
 	const signOut = () => {
+		localStorage.removeItem('user')
 		setUser(null);
 	}
 
-	const value = {user, signIn, signOut, registerUser}
+	const isUserLoggedIn = () => {
+		return (!!user && !!user.stsTokenManager.accessToken)
+	}
+
+	/**
+	 * Remove the sensitive data from auth object and then save it as login status.
+	 * @param {Object} user object from auth api
+	 */
+	const storeUser = (user) => {
+		// console.log("user", user)
+		// console.log("stringigy user", JSON.parse(JSON.stringify(user)))
+
+		// Delete the sensitive data.
+		delete user.auth.config.apiKey
+		
+		LocalStorage.setItem('user', user)
+		setUser(user)
+	}
+
+	const value = { user, signIn, signOut, registerUser, isUserLoggedIn }
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

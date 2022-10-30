@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { useAuth } from 'auth'
 
 import './Home.scss';
 
@@ -14,6 +17,8 @@ import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import NoPoster from '../../assests/images/no_poster.jpg'
 
 function Home(props) {
+    const {user, isUserLoggedIn} = useAuth();
+    const navigate = useNavigate();
 
     const [isSearchAcitve, setIsSearchActive] = useState(false);
 
@@ -45,8 +50,15 @@ function Home(props) {
         <div className="home">
             <div className={`header-container ${isSearchAcitve ? "header-active" : ""}`}>
                 <div className='account-buttons'>
-                    <Button onClick={() => setIsRegisterModalOpen(true)}>Register</Button>
-                    <Button onClick={() => setIsLoginModalOpen(true)}>Login</Button>
+                    {
+                        isUserLoggedIn() ? (<>
+                            <Button onClick={() => navigate("/dashboard")}>Dashboard</Button>
+                        </>) :
+                        (<>
+                            <Button onClick={() => setIsRegisterModalOpen(true)}>Register</Button>
+                            <Button onClick={() => setIsLoginModalOpen(true)}>Login</Button>
+                        </>)
+                    }
                 </div>
                 <h1 className="website-name">Entertainment Dive</h1>
                 <div className='home-searchbar'>

@@ -4,10 +4,10 @@ import {Navigate} from 'react-router-dom'
 import {useAuth} from 'auth'
 
 function ProtectedRoute({children}) {
-	const {user} = useAuth()
+	const {isUserLoggedIn} = useAuth()
 
-	if (!user) return (<><Navigate to="/" /></>)
-	else return (<>{children}</>)
+	if (isUserLoggedIn()) return (<>{children}</>)
+	else return (<><Navigate to="/" /></>)
 }
 
 export default ProtectedRoute
