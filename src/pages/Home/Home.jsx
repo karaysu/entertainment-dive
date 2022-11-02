@@ -17,7 +17,7 @@ import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import NoPoster from '../../assests/images/no_poster.jpg'
 
 function Home(props) {
-    const {user, isUserLoggedIn} = useAuth();
+    const {signOut, isUserLoggedIn} = useAuth();
     const navigate = useNavigate();
 
     const [isSearchAcitve, setIsSearchActive] = useState(false);
@@ -53,6 +53,7 @@ function Home(props) {
                     {
                         isUserLoggedIn() ? (<>
                             <Button onClick={() => navigate("/dashboard")}>Dashboard</Button>
+                            <Button onClick={() => {signOut(); navigate("/")}}>Sign Out</Button>
                         </>) :
                         (<>
                             <Button onClick={() => setIsRegisterModalOpen(true)}>Register</Button>
