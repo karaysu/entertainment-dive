@@ -38,4 +38,26 @@
     opacity: 0;
     transition: .5s;
 	}
+
+  i {
+    transition: .5s;
+    cursor: pointer;
+
+    &:hover {
+      color : red;
+    }
+
+    &::before {
+      transform: scale(1);
+      transition: transform 0.2s;
+    }
+
+    &:active::before {
+      transform: scale(0.7);
+    }
+  }
+
+  .font-color-red {
+    color: red;
+  }
 }

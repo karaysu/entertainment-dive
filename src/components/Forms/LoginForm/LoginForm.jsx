@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useAuth } from 'auth'
 import { useEffect } from 'react';
+import { useDatabase } from 'database';
 
 function LoginForm() {
 	const navigate = useNavigate();
@@ -12,6 +13,7 @@ function LoginForm() {
 	})
 
 	const {user,signIn} = useAuth();
+	const {getMovies} = useDatabase();
 
 	const handleValueChange = function (field, value) {
 		setFormData({
@@ -41,6 +43,8 @@ function LoginForm() {
 	// As soon as User value is set, navigate to dashboard.
 	useEffect(()=> {
 		if(!user) return;
+
+		getMovies(user.uid)
 		navigate("/dashboard")
 	}, [user])
 
