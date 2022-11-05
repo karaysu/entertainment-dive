@@ -6,7 +6,7 @@ import './Card.scss';
 import { useAuth } from 'auth';
 import { useEffect } from 'react';
 
-function Card({ id, title, poster, doesHavePoster }) {
+function Card({ id, title, poster, doesHavePoster, detailView = false }) {
 	const basePosterURL = 'http://image.tmdb.org/t/p/w500';
 
 	const [liked, setLiked] = useState(false);
@@ -16,12 +16,15 @@ function Card({ id, title, poster, doesHavePoster }) {
 
 	let fullPosterURL = doesHavePoster ? basePosterURL + poster : poster;
 
+
+	// Update the like button for all saved movies.
 	useEffect(() => {
-		if (id in movies) {
-			setLiked(true)
-		} else {
-			setLiked(false)
-		}
+			if (id in movies) {
+				setLiked(true)
+			} else {
+				setLiked(false)
+			}
+			
  	}, [movies])
 
 	function handleLikeClick(e) {
@@ -49,6 +52,11 @@ function Card({ id, title, poster, doesHavePoster }) {
 							onClick={handleLikeClick}
 						></i>
 					</div>
+					{
+						detailView && (<>
+							<div>Testing text</div>
+						</>)
+					}
 				</div>
 			</div>
 		</div>

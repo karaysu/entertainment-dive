@@ -43,8 +43,6 @@ function LoginForm() {
 	// As soon as User value is set, navigate to dashboard.
 	useEffect(()=> {
 		if(!user) return;
-
-		getMovies(user.uid)
 		navigate("/dashboard")
 	}, [user])
 

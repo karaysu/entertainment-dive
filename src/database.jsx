@@ -12,7 +12,11 @@ export function DatabaseProvider({children}) {
 
 	const {user} = useAuth()
 
-	useEffect(() => { if(user == null) { setMovies([]) } }, [user])
+	useEffect(() => { 
+		// Handles data loading on sign in and sign out.
+		if(user == null) { setMovies([]) } 
+		else { getMovies(user.uid) }
+	}, [user])
 
 	const db = getDatabase(firebaseApp)
 	const [movies, setMovies] = useState([])
@@ -32,6 +36,7 @@ export function DatabaseProvider({children}) {
 
 		try {
 			await remove(movieReference)
+			await getMovies(user.uid)
 		} catch (err) {
 			console.error("Error while removing a movie")
 		}
