@@ -10,8 +10,6 @@ import Button from 'components/Button/Button';
 import Card from 'components/Card/Card';
 import NoPoster from '../../assests/images/no_poster.jpg'
 
-import './Dashboard.scss'
-
 // Only authenticated users are authorized to view this page. 
 function Dashboard() {
 	const navigate = useNavigate();
