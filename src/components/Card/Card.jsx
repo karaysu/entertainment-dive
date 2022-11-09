@@ -53,8 +53,13 @@ function Card({ id, title, poster, doesHavePoster, detailView = false }) {
 						></i>
 					</div>
 					{
-						detailView && (<>
-							<div>Testing text</div>
+						detailView && (movies[id].goToLink !== undefined) && (<>
+							<a 
+								href={movies[id].goToLink} 
+								className="link-primary"	
+								rel="noopener"
+								target='_blank'
+							>Primary link</a>
 						</>)
 					}
 				</div>

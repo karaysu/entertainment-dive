@@ -20,7 +20,7 @@ function Dashboard() {
 
 	// On update in saved movies, fetch all the required movies data from tmdb api to display in cards.
 	useEffect(() => {
-		(async ()=>{		
+		(async () => {
 			const resultMoviesList = await Promise.all(Object.keys(movies).map(async movieId => {
 				const response = await fetchMovieDetailById(movieId)
 				// console.log(response)
@@ -45,7 +45,7 @@ function Dashboard() {
 			</div>
 		</div>
 		<div className='card-container d-flex flex-wrap  px-5 mt-5'>
-			{moviesList.map(({ id, title, poster_path }) => (<>
+			{moviesList.map(({ id, title, poster_path }) => (
 				<Card
 					key={id}
 					id={id}
@@ -54,7 +54,7 @@ function Dashboard() {
 					doesHavePoster={poster_path !== null}
 					detailView={true}
 				/>
-			</>))}
+			))}
 		</div>
 	</>
 	)
