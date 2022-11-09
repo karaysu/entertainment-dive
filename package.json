@@ -20,7 +20,7 @@
     "serve": "^11.3.2"
   },
   "scripts": {
-    "dev": "set PORT=4200 && react-scripts start",
+    "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
