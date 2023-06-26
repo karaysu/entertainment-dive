@@ -21,11 +21,11 @@ export function DatabaseProvider({children}) {
 	const db = getDatabase(firebaseApp)
 	const [movies, setMovies] = useState([])
 
-	const addMovie = async (userId, movieId, movieName) => {
-		const moviesReference = ref(db, 'movies/' + userId +"/"+ movieId)
+	const addMovie = async (userId, id, name, mediaType) => {
+		const moviesReference = ref(db, 'movies/' + userId +"/"+ id)
 		try {
 
-			await set(moviesReference, movieName)
+			await set(moviesReference, {name, mediaType})
 		} catch (err) {
 			console.error("Error while adding movie")
 		}
@@ -48,7 +48,8 @@ export function DatabaseProvider({children}) {
 
 		try {
 			const response = await get(child(ref(db), moviesListURL))
-			setMovies(response.val())
+			if (response.val()!==null)
+				setMovies(response.val())
 		} catch (error) {
 			console.error("Error while fetching movies by user")
 		}

@@ -45,14 +45,15 @@ function Dashboard() {
 			</div>
 		</div>
 		<div className='card-container d-flex flex-wrap  px-5 mt-5'>
-			{moviesList.map(({ id, title, poster_path }) => (
+			{moviesList.map(({ id, title, name, poster_path, media_type }) => (
 				<Card
 					key={id}
 					id={id}
-					title={title}
+					title={title===undefined ? name : title}
 					poster={poster_path ? poster_path : NoPoster}
 					doesHavePoster={poster_path !== null}
 					detailView={true}
+					mediaType={media_type}
 				/>
 			))}
 		</div>

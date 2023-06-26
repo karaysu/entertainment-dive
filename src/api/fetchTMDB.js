@@ -7,6 +7,12 @@ export async function fetchMoviesBySearchText(searchText, pageNumber) {
   return await data.json();
 }
 
+export async function fetchMediaBySearchText(searchText, pageNumber) {
+  const endpoint = `${baseUrl}/search/multi?api_key=${apiKey}&language=en-US&query=${searchText}&page=${pageNumber}&include_adult=false`;
+  const data = await fetch(endpoint);
+  return await data.json();
+}
+
 export async function fetchMovieDetailById(id) {
   const endpoint = `${baseUrl}/movie/${id}?api_key=${apiKey}&language=en-US`;
   const data = await fetch(endpoint);

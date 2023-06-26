@@ -6,7 +6,7 @@ import './Card.scss';
 import { useAuth } from 'auth';
 import { useEffect } from 'react';
 
-function Card({ id, title, poster, doesHavePoster, detailView = false }) {
+function Card({ id, title, poster, doesHavePoster, detailView = false, mediaType }) {
 	const basePosterURL = 'http://image.tmdb.org/t/p/w500';
 
 	const [liked, setLiked] = useState(false);
@@ -34,7 +34,7 @@ function Card({ id, title, poster, doesHavePoster, detailView = false }) {
 			removeMovie(user.uid, id)
 			setLiked(false);
 		} else {
-			addMovie(user.uid, id, title)
+			addMovie(user.uid, id, title, mediaType)
 			setLiked(true);
 		}
 	}
@@ -43,25 +43,28 @@ function Card({ id, title, poster, doesHavePoster, detailView = false }) {
 	return (
 		<div className="movie-card" >
 			<div className="content">
+				<span className="mediatype">{mediaType==="movie" ? "Movie": "TV"}</span>
 				<img className="cover" src={`${fullPosterURL}`} alt="Cover" />
 				<div className="title">
 					<div>{title}</div>
 					<div>
 						<i 
+							title="Like"
 							className={`bi bi-heart-fill ${liked ? "font-color-red" : ""}`}
 							onClick={handleLikeClick}
 						></i>
-					</div>
 					{
-						detailView && (movies[id].link !== undefined) && (<>
+						(detailView && !(movies[id].link === undefined)) && <>
 							<a 
 								href={movies[id].link} 
-								className="link-primary"	
+								title="Click to watch"
+								className="link-primary px-3"	
 								rel="noopener"
 								target='_blank'
-							>Primary link</a>
-						</>)
+							><i className="bi bi-tv text-white"></i></a>
+						</>
 					}
+					</div>
 				</div>
 			</div>
 		</div>

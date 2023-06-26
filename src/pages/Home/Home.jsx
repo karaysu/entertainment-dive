@@ -17,7 +17,7 @@ import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import NoPoster from '../../assests/images/no_poster.jpg'
 
 function Home(props) {
-    const {signOut, isUserLoggedIn} = useAuth();
+    const { signOut, isUserLoggedIn } = useAuth();
     const navigate = useNavigate();
 
     const [isSearchAcitve, setIsSearchActive] = useState(false);
@@ -31,7 +31,14 @@ function Home(props) {
     //Rendering the API cards
     const renderCards = arr => (
         arr.map((card, index) => {
-            return <Card key={index} id={card.id} title={card.title} poster={card.poster_path ? card.poster_path : NoPoster} doesHavePoster={card.poster_path != null} />
+            return <Card
+                key={index}
+                id={card.id}
+                title={card.title === undefined ? card.name : card.title}
+                poster={card.poster_path ? card.poster_path : NoPoster}
+                doesHavePoster={card.poster_path != null}
+                mediaType={card.media_type}
+            />
         })
     )
 
@@ -53,12 +60,12 @@ function Home(props) {
                     {
                         isUserLoggedIn() ? (<>
                             <Button onClick={() => navigate("/dashboard")}>Dashboard</Button>
-                            <Button onClick={() => {signOut(); navigate("/")}}>Sign Out</Button>
+                            <Button onClick={() => { signOut(); navigate("/") }}>Sign Out</Button>
                         </>) :
-                        (<>
-                            <Button onClick={() => setIsRegisterModalOpen(true)}>Register</Button>
-                            <Button onClick={() => setIsLoginModalOpen(true)}>Login</Button>
-                        </>)
+                            (<>
+                                <Button onClick={() => setIsRegisterModalOpen(true)}>Register</Button>
+                                <Button onClick={() => setIsLoginModalOpen(true)}>Login</Button>
+                            </>)
                     }
                 </div>
                 <h1 className="website-name">Entertainment Dive</h1>
@@ -86,9 +93,9 @@ function Home(props) {
                 <RegisterForm />
             </Modal>
 
-            <Modal 
-                isOpen={isLoginModalOpen} 
-                closeModal={() => setIsLoginModalOpen(false)} 
+            <Modal
+                isOpen={isLoginModalOpen}
+                closeModal={() => setIsLoginModalOpen(false)}
                 title="Dive into your entertainment hub!"
             >
                 <LoginForm />

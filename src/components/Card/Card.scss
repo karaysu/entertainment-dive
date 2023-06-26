@@ -3,6 +3,21 @@
   width: fit-content;
   position: relative;
   margin: 0.625rem;
+
+  .content {
+    .mediatype {
+      background-color: var(--dark-primary-color); 
+      color: var(--bg-color);
+      padding: 5px;
+
+      font-size: 0.6rem;
+      font-weight: 700;
+      
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+  }
   
   .content:hover {
     outline: 1px solid white;
@@ -43,18 +58,26 @@
     transition: .5s;
     cursor: pointer;
 
-    &:hover {
-      color : red;
+    .bi-heart-fill {
+      
+      &:hover {
+        color : red;
+      }
+  
+      &::before {
+        transform: scale(1);
+        transition: transform 0.2s;
+      }
+  
+      &:active::before {
+        transform: scale(0.7);
+      }
     }
 
-    &::before {
-      transform: scale(1);
-      transition: transform 0.2s;
+    .bi-tv {
+      color: white !important;
     }
 
-    &:active::before {
-      transform: scale(0.7);
-    }
   }
 
   .font-color-red {
