@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/entertainment-dive/static/css/main.608bc664.css",
+    "main.js": "/entertainment-dive/static/js/main.58504d9a.js",
+    "static/media/no_poster.jpg": "/entertainment-dive/static/media/no_poster.1f3a75c21a8843413c0a.jpg",
+    "index.html": "/entertainment-dive/index.html",
+    "main.608bc664.css.map": "/entertainment-dive/static/css/main.608bc664.css.map",
+    "main.58504d9a.js.map": "/entertainment-dive/static/js/main.58504d9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.608bc664.css",
+    "static/js/main.58504d9a.js"
+  ]
+}
